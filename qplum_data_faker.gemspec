@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.name = %q{qplum_data_faker}
   s.version = "0.0.0"
   s.date = %q{2011-09-29}
-  s.summary = %q{awesome_gem is the best}
+  s.summary = %q{Wrapper gem over faker to fake qplum related data}
   s.files = Dir[
     'lib/*.rb',
     'lib/*/*.rb'
