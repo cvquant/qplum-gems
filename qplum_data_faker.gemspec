@@ -12,4 +12,6 @@ Gem::Specification.new do |s|
   ]
   s.authors     = ["Karun"]
   s.require_paths = ["lib"]
+  s.add_dependency 'faker'
+  s.add_dependency 'activesupport'
 end
