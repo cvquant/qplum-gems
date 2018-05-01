@@ -1,3 +1,6 @@
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 Gem::Specification.new do |s|
   s.name = %q{qplum_data_faker}
   s.version = "0.0.0"
