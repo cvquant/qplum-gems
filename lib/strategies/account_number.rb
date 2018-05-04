@@ -1,6 +1,6 @@
 module QplumDataFaker
   class AccountNumber
-    def self.anonymize(account_number = nil)
+    def self.anonymize(account_number=nil)
       if account_number.present?
         "QPLUM"+account_number.last(4)
       else
