@@ -1,7 +1,7 @@
 module Slackit
   class Message
 
-    attr_accessor :text, :fields, :tables, :mentions, :color, :sender, :pretext
+    attr_accessor :text, :pretext, :fields, :tables, :mentions, :color, :sender
 
     def initialize(text="")
       @text = text
@@ -11,17 +11,18 @@ module Slackit
       self
     end
 
+    def add_pretext(pretext)
+      @pretext = pretext
+
+    end
+
     def add_fields(fields)
       fields.each{ |k,v| add_field(k,v) }
       self
     end
 
     def add_field(key, value)
-      @fields << {
-        title: "#{key.to_s.titleize}",
-        value: "_#{value}_",
-        short: true
-      }
+      @fields << Attachment::Field.new(key, value)
       self
     end
 
@@ -48,16 +49,20 @@ module Slackit
 
     def attachment
       {
-        pretext: "[#{Rails.env.upcase}]",
-        text: formatted,
+        pretext: nil,
+        text: formatted_text,
         color: @color,
-        fields: @fields,
+        fields: formatted_fields,
         mrkdwn_in: [:text, :fields]
       }
     end
 
-    def formatted
-      @text + @mentions.map{|mention| mention.formatted }.join('') + @tables.map{|table| table.formatted }.join('')
+    def formatted_text
+      @text + @mentions.map{ |mention| mention.formatted }.join('') + @tables.map{ |table| table.formatted }.join('')
+    end
+
+    def formatted_fields
+      @fields.map{ |field| field.formatted }
     end
 
     def self.define_methods

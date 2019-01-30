@@ -4,6 +4,7 @@ require "slackit/configuration"
 require "slackit/message"
 require "slackit/attachment/table"
 require "slackit/attachment/mention"
+require "slackit/attachment/field"
 
 module Slackit
   class << self
