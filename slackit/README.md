@@ -92,16 +92,23 @@ Send message from specific sender
 
 Mention people in the message
 ```ruby
-  slack_message.mention("mention1")
+  slack_message.mention("person1")
 ```
 Or
 ```ruby
-  slack_message.mention(["mention1", "mention2"])
+  slack_message.mention(["person1", "person2"])
 ```
 
 Attach a table in the message
 ```ruby
   slack_message.attach_table([["column1", "column2"],["row11", "row12"],["row21", "row22"]])
+```
+
+
+Example
+```ruby
+Slackit::Message.new("Main Message").add_pretext("[PRETEXT]").add_fields({ field1: "value1", field2: "value2" }).set_color("#ffff00").from("Message Sender").mention(["person1", "person2"]).attach_table([["column1", "column2"],["row11", "row12"],["row21", "row22"]]).send_to_marketing
+
 ```
 
 Enjoy using Slackit!!
