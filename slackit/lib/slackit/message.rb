@@ -13,7 +13,7 @@ module Slackit
 
     def add_pretext(pretext)
       @pretext = pretext
-
+      self
     end
 
     def add_fields(fields)
@@ -49,7 +49,7 @@ module Slackit
 
     def attachment
       {
-        pretext: nil,
+        pretext: @pretext,
         text: formatted_text,
         color: @color,
         fields: formatted_fields,
