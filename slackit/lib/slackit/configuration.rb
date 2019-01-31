@@ -14,16 +14,9 @@ module Slackit
     end
 
     def channel(channel_name)
-      channel_name = clean_channel_name(channel_name.to_s)
-      @channels[channel_name] ||= Channel.new(channel_name, @default_sender, @default_color)
-      yield(@channels[channel_name]) if block_given?
-    end
-
-    private
-
-    def clean_channel_name(channel_name)
-      channel_name = channel_name[1..-1] if channel_name.first == '#'
-      channel_name.downcase
+      clean_channel_name = Channel.clean_name(channel_name)
+      @channels[clean_channel_name] ||= Channel.new(channel_name.to_s, @default_sender, @default_color)
+      yield(@channels[clean_channel_name]) if block_given?
     end
   end
 end

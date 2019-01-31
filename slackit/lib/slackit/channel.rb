@@ -10,8 +10,16 @@ module Slackit
     end
 
     def send_to_channel(attachment, sender)
-      attachment.merge({ color: @default_color })
+      attachment[:color] ||= @default_color
       notifier(sender).ping '', attachments: [attachment]
+    end
+
+    def self.clean_name(channel_name)
+      channel_name = channel_name.to_s
+      channel_name = channel_name[1..-1] if channel_name.first == '#'
+      channel_name = channel_name.sub('-','_')
+      channel_name = channel_name.downcase
+      channel_name
     end
 
     private
