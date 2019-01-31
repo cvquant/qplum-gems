@@ -32,9 +32,7 @@ Slackit.setup do |config|
 
   config.webhook_url = "https://hooks.slack.com/services/MySlack/MySlackWebhookUrl"
 
-  config.default_sender = "MyApplication"
-
-  config.channels = ["#general", "#exceptions", "#marketing"]
+  config.default_sender = "Default Sender"
 
   config.channel :general do |channel|
     channel.default_sender = "General Sender"
@@ -48,6 +46,9 @@ Slackit.setup do |config|
   config.channel :marketing do |channel|
     channel.default_color = "#666666"
   end
+
+  config.channel :another_channel
+  config.channel :yet_another_channel
 
 end
 ```
@@ -107,7 +108,7 @@ Attach a table in the message
 
 Example
 ```ruby
-Slackit::Message.new("Main Message").add_pretext("[PRETEXT]").add_fields({ field1: "value1", field2: "value2" }).set_color("#ffff00").from("Message Sender").mention(["person1", "person2"]).attach_table([["column1", "column2"],["row11", "row12"],["row21", "row22"]]).send_to_marketing
+Slackit::Message.new("Main Message").add_pretext("[PRETEXT]").add_fields({ field1: "value1", field2: "value2" }).set_color("#ffff00").from("Message Sender").mention(["person1", "person2"]).attach_table([["column1", "column2"],["row11", "row12"],["row21", "row22"]]).send_to_another_channel
 
 ```
 

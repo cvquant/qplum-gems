@@ -10,22 +10,13 @@ module Slackit
     end
 
     def channels
-      @channels ||= {}
-    end
-
-    def channels=(channel_names)
-      @channels ||= {}
-      channel_names.each do |channel_name|
-        channel_name = clean_channel_name(channel_name)
-        @channels[channel_name] ||= Channel.new(channel_name, @default_sender, @default_color)
-      end
-      Message.define_methods
+      @channels
     end
 
     def channel(channel_name)
       channel_name = clean_channel_name(channel_name.to_s)
-      raise unless @channels.present? && @channels.key?(channel_name)
-      yield(@channels[channel_name])
+      @channels[channel_name] ||= Channel.new(channel_name, @default_sender, @default_color)
+      yield(@channels[channel_name]) if block_given?
     end
 
     private

@@ -6,7 +6,6 @@ module Slackit
 
       def initialize(name)
         @name = name
-        self
       end
 
       def formatted

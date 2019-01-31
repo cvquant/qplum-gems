@@ -6,7 +6,6 @@ module Slackit
 
       def initialize(rows)
         @rows = rows
-        self
       end
 
       def formatted

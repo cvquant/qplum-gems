@@ -7,7 +7,6 @@ module Slackit
       def initialize(key, value)
         @key = key
         @value = value
-        self
       end
 
       def formatted

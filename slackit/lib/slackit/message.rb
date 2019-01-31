@@ -1,6 +1,8 @@
 module Slackit
   class Message
 
+    SEND_TO_PREFIX = "send_to_"
+
     attr_accessor :text, :pretext, :fields, :tables, :mentions, :color, :sender
 
     def initialize(text="")
@@ -8,7 +10,6 @@ module Slackit
       @fields = []
       @tables = []
       @mentions = []
-      self
     end
 
     def add_pretext(pretext)
@@ -65,11 +66,17 @@ module Slackit
       @fields.map{ |field| field.formatted }
     end
 
-    def self.define_methods
-      Slackit.channels.each do |channel_name, channel|
-        self.send(:define_method, "send_to_#{channel_name}") do
-          channel.send_to_channel(attachment, @sender)
+    def method_missing(m, *args, &block)
+      method_name = m.to_s
+      if method_name.start_with?(SEND_TO_PREFIX) && method_name.size > SEND_TO_PREFIX.size
+        channel_name = method_name[SEND_TO_PREFIX.size..-1]
+        if Slackit.channels.key?(channel_name)
+          Slackit.channels[channel_name].send_to_channel(attachment, @sender)
+        else
+          raise Exception::UnknownChannelException.new("channel #{channel_name} is unknown to Slackit.")
         end
+      else
+        super
       end
     end
 

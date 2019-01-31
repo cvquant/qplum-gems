@@ -5,6 +5,7 @@ require "slackit/message"
 require "slackit/attachment/table"
 require "slackit/attachment/mention"
 require "slackit/attachment/field"
+require "slackit/exception/unknown_channel_exception"
 
 module Slackit
   class << self
